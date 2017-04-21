@@ -47,7 +47,7 @@ get_uncorrelated_variables <- function(data, cutoff=0.1){
   # Aggregate pairwise correlation results into single wide matrix
   pairwise_corr_mat <- rbind(cont_cont_pval_df, cont_disc_pval_df, cont_disc_pval_df[,c(2,1,3)], disc_disc_pval_df)
   pairwise_corr_mat <- reshape(pairwise_corr_mat, idvar="Var1", timevar="Var2", direction="wide")
-  if (!(setequal(colnames(pairwise_corr_mat),colnames(data)) && setequal(colnames(pairwise_corr_mat),colnames(data)))){
+  if (!(setequal(rownames(pairwise_corr_mat),colnames(data)) && setequal(colnames(pairwise_corr_mat),colnames(data)))){
     stop("Something has gone horribly wrong!")
   } else{
     pairwise_corr_mat <- pairwise_corr_mat[colnames(data),colnames(data)]
